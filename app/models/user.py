@@ -11,6 +11,7 @@ from .base import Base
 
 if TYPE_CHECKING:
     from .balance import Balance
+    from .card import Card
 
 class User(Base):
     __tablename__ = "users"
@@ -23,4 +24,7 @@ class User(Base):
 
     balances: Mapped[list["Balance"]] = relationship(
         "Balance", back_populates="user", cascade="all, delete-orphan"
+    )    
+    cards: Mapped[list["Card"]] = relationship(
+        "Card", back_populates="user", cascade="all, delete-orphan"
     )
