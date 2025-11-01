@@ -9,6 +9,10 @@ from sqlalchemy import Enum as SAEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .base import Base
 
+class CardType(enum.Enum):
+    PHYSICAL = "PHYSICAL"
+    VIRTUAL = "VIRTUAL"
+
 class CardStatus(str, enum.Enum):
     active = "active"
     frozen = "frozen"
@@ -24,7 +28,9 @@ class Card(Base):
     user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id", ondelete="CASCADE"))
 
     masked_pan: Mapped[str] = mapped_column(String(19))            # e.g., "545454******5454"
-    type: Mapped[str] = mapped_column(String(16), default="virtual")  # "virtual" | "physical"
+    
+    card_type: Mapped[CardType] = mapped_column(SAEnum(CardType), nullable=False)
+
     status: Mapped[CardStatus] = mapped_column(SAEnum(CardStatus), default=CardStatus.active)
 
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
