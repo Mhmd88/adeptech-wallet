@@ -6,7 +6,7 @@ def test_create_user_seeds_balances():
     app = create_app(testing=True)
     client = app.test_client()
 
-    res = client.post("/v1/users", data=json.dumps({
+    res = client.post("/v1/users/", data=json.dumps({
         "email": "apiuser@example.com",
         "full_name": "API User",
         "password": "secret"
