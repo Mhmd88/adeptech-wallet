@@ -1,11 +1,11 @@
 import json
-from app.models import User, Balance, Card, AuthHold, CardStatus
+from app.models import User, Balance, Card, CardType, AuthHold, CardStatus
 
 def setup_user_and_card(session):
     user = User(email="carduser@example.com", full_name="Card User", password_hash="hash")
     session.add(user); session.flush()
     session.add(Balance(user_id=user.id, currency="USD", currency_code=840, available_minor=10000))
-    card = Card(user_id=user.id, masked_pan="545454******5454", type="virtual", status=CardStatus.active)
+    card = Card(user_id=user.id, masked_pan="545454******5454", card_type=CardType.VIRTUAL, status=CardStatus.active)
     session.add(card); session.commit()
     return user, card
 
