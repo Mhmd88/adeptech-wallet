@@ -6,7 +6,7 @@ def test_topup_endpoint_increments_balance():
     client = app.test_client()
 
     # create user first
-    client.post("/v1/users", data=json.dumps({
+    client.post("/v1/users/", data=json.dumps({
         "email": "seed@example.com", "full_name": "Seed", "password": "x"
     }), content_type="application/json")
 

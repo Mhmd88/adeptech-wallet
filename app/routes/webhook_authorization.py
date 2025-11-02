@@ -1,12 +1,12 @@
+from __future__ import annotations
+
 from flask import Blueprint, request, jsonify
-from app.services.webhook_authorization import (
-    authorize_transaction,
-    AuthorizationError
-)
+from app.services.webhook_authorization import authorize_transaction, AuthorizationError
 
-bp = Blueprint("auth_webhook", __name__)
+bp = Blueprint("auth_webhook", __name__)  
 
-def _base_response(req):
+def _base_response(req: dict) -> dict:
+    
     return {
         "messageType": "2110",
         "primaryAccountNumber": req.get("primaryAccountNumber"),
@@ -44,12 +44,13 @@ def authorize_card():
                 "currencyCode": req.get("currencyCode"),
                 "currencyMinorUnit": "2",
                 "amountSign": "C",
-                "value": str(int(new_balance_minor)).zfill(12),
+                "value": str(int(new_balance_minor)).zfill(12),  
             }],
         })
         return jsonify(resp), 200
 
     except AuthorizationError as e:
+        # Decline path (insufficient funds, inactive card, bad payload, etc.)
         resp = _base_response(req)
         resp.update({
             "actionCode": "005",
