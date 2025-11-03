@@ -122,7 +122,9 @@ Response:
   "declineReason": "insufficient_funds"
 }
 
-PowerShell Quick Commands to simulate a real situation
+
+💻 PowerShell Quick Commands to simulate a real situation
+ 
 # Create users
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/users/" -ContentType "application/json" -Body (@{ email="alice@example.com"; full_name="Alice"; password="pass" } | ConvertTo-Json -Compress)
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/users/" -ContentType "application/json" -Body (@{ email="bob@example.com"; full_name="Bob"; password="pass" } | ConvertTo-Json -Compress)
