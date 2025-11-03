@@ -126,19 +126,24 @@ Response:
 💻 PowerShell Quick Commands to simulate a real situation
  
 Create users
+
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/users/" -ContentType "application/json" -Body (@{ email="alice@example.com"; full_name="Alice"; password="pass" } | ConvertTo-Json -Compress)
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/users/" -ContentType "application/json" -Body (@{ email="bob@example.com"; full_name="Bob"; password="pass" } | ConvertTo-Json -Compress)
 
 Top up Alice
+
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/balances/topup" -ContentType "application/json" -Body (@{ email="alice@example.com"; currency="USD"; amount_minor=10000 } | ConvertTo-Json -Compress)
 
 Transfer $12.34 from Alice → Bob
+
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/p2p/transfer" -ContentType "application/json" -Headers @{ "Idempotency-Key"="p2p-demo-001" } -Body (@{ from="alice@example.com"; to="bob@example.com"; currency="USD"; amount="12.34" } | ConvertTo-Json -Compress)
 
 Create a virtual card
+
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/cards/" -ContentType "application/json" -Body (@{ email="alice@example.com"; masked_pan="555555******9999"; type="VIRTUAL"; status="active" } | ConvertTo-Json -Compress)
 
 Webhook authorization test
+
 Invoke-RestMethod -Method POST -Uri "http://localhost:5000/v1/webhooks/authorization" -ContentType "application/json" -Body (@{ primaryAccountNumber="555555******9999"; currencyCode="840"; amountTransaction="12.00"; idempotency_key="auth-approve-001" } | ConvertTo-Json -Compress)
 
 
