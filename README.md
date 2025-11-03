@@ -14,6 +14,10 @@ This project implements a minimal e-wallet system using Flask and PostgreSQL, co
 
 ✅ Card authorization webhook (approve/decline logic)
 
+
+ ⚙️Loom video link for a demo of the project usage
+   https://www.loom.com/share/1953850bf3c34bafb17d7bda3e91ef66
+
 ⚙️ Setup Instructions
 1️⃣ Clone and install dependencies
 git clone (https://github.com/Mhmd88/adeptech-wallet)
